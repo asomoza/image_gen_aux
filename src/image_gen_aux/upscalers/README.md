@@ -2,9 +2,13 @@
 
 ## Upscale with model
 
-Class to upscale images with a safetensor checkpoint. We use [spandrel](https://github.com/chaiNNer-org/spandrel) for loading, and you can see the list of supported models [here]([list](https://github.com/chaiNNer-org/spandrel?tab=readme-ov-file#model-architecture-support)).
+Class to upscale images with a safetensor checkpoint. We use [spandrel](https://github.com/chaiNNer-org/spandrel) for loading, and you can see the list of supported models [here](https://github.com/chaiNNer-org/spandrel?tab=readme-ov-file#model-architecture-support).
 
 Most of the super-resolution models are provided as `pickle` checkpoints, which are considered unsafe. We promote the use of safetensor checkpoints, and for convenient use, we recommend using the Hugging Face Hub. You can still use a locally downloaded model.
+
+### Space
+
+You can test the current super resolution models you can use with this [Hugging Face Space](https://huggingface.co/spaces/OzzyGT/basic_upscaler).
 
 ### How to use
 
