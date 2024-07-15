@@ -16,11 +16,17 @@
 
 # Image Generation Auxiliary Tools
 
-Set of auxiliary tools to use with image and video generation libaries. Mainly created to be used with [diffusers](https://github.com/huggingface/diffusers).
+Set of auxiliary tools to use with image and video generation libraries. Mainly created to be used with [diffusers](https://github.com/huggingface/diffusers).
+
+## Tools
+
+Each tool has its own README where you can find more information on how to use them.
+
+* [Upscalers](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/upscalers/README.md)
 
 ## Installation
 
-This is a very early version so only the installation from source is avalaible.
+This is a very early version, so only the installation from source is available.
 
 ### Install from source
 
@@ -36,4 +42,4 @@ Soon
 
 ## Credits
 
-This library uses inference and models from various authors, each one is credited in their own section. If we you think you must be credited or if we are missing someone please let us know.
+This library uses inference and models from various authors, each one is credited in their own section. If you think you must be credited or if we are missing someone, please let us know.
