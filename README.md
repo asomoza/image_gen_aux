@@ -42,4 +42,13 @@ Soon
 
 ## Credits
 
-This library uses inference and models from various authors, each one is credited in their own section. If you think you must be credited or if we are missing someone, please let us know.
+This library uses inference and models from various authors. If you think you must be credited or if we are missing someone, please let us know.
+
+### Libraries
+
+* [Spandrel](https://github.com/chaiNNer-org/spandrel) for loading super resolution models.
+
+### Super resolution models
+
+* [UltraSharp](https://openmodeldb.info/models/4x-UltraSharp)
+* [DAT](https://github.com/zhengchen1999/dat)
