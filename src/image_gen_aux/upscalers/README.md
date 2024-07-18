@@ -35,7 +35,7 @@ image = upscaler(original, tiling=True, tile_width=768, tile_height=768, overlap
 
 ### Scale
 
-The scale is automatically obtained from the model but you can override the scale with the `scale` argumen:
+The scale is automatically obtained from the model but can be overridden with the `scale` argument:
 
 ```python
 image = upscaler(original, scale=2)
