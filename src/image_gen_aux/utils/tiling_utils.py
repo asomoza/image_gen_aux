@@ -1,9 +1,9 @@
-from typing import Callable
+from typing import Callable, Tuple
 
 import torch
 
 
-def create_gradient_mask(shape: tuple, feather: int, device="cpu") -> torch.Tensor:
+def create_gradient_mask(shape: Tuple, feather: int, device="cpu") -> torch.Tensor:
     """
     Create a gradient mask for smooth blending of tiles.
 

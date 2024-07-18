@@ -45,7 +45,9 @@ class UpscaleWithModel(ImageMixin):
         return self
 
     @classmethod
-    def from_pretrained(cls, pretrained_model_or_path, filename=None, subfolder=None):
+    def from_pretrained(
+        cls, pretrained_model_or_path: Union[str, os.PathLike], filename: str = None, subfolder: str = None
+    ) -> ImageModelDescriptor:
         r"""
         Instantiate the Upscaler class from pretrained weights.
 
@@ -94,13 +96,27 @@ class UpscaleWithModel(ImageMixin):
         tile_height: int = 512,
         overlap: int = 8,
         return_type: str = "pil",
-    ):
+    ) -> Union[torch.Tensor, PIL.Image.Image, np.ndarray]:
         r"""
-        Function invoked when calling the upscaler.
+        Upscales the given image, optionally using tiling.
 
         Args:
-            image (`torch.Tensor`, `PIL.Image.Image`, `np.ndarray`):
-                The initial image will be upscaled
+            image (Union[PIL.Image.Image, np.ndarray, torch.Tensor]):
+                The image to be upscaled. Can be a PIL Image, NumPy array, or PyTorch tensor.
+            tiling (bool, optional):
+                Whether to use tiling for upscaling. Default is False.
+            tile_width (int, optional):
+                The width of each tile if tiling is used. Default is 512.
+            tile_height (int, optional):
+                The height of each tile if tiling is used. Default is 512.
+            overlap (int, optional):
+                The overlap between tiles if tiling is used. Default is 8.
+            return_type (str, optional):
+                The type of the returned image. Can be 'pil', 'numpy', or 'tensor'. Default is 'pil'.
+
+        Returns:
+            Union[torch.Tensor, PIL.Image.Image, np.ndarray]:
+                The upscaled image, in the format specified by `return_type`.
         """
         if not isinstance(image, torch.Tensor):
             image = self.convert_image_to_tensor(image)

@@ -21,13 +21,44 @@ from PIL import Image
 
 
 class ImageMixin:
-    def convert_image_to_tensor(self, image: Union[PIL.Image.Image, np.ndarray]):
+    """
+    A mixin class for converting images between different formats: PIL, NumPy, and PyTorch tensors.
+
+    This class provides methods to:
+    - Convert a PIL image or a NumPy array to a PyTorch tensor.
+    - Post-process a PyTorch tensor image and convert it to the specified return type.
+    - Convert a PIL image or a list of PIL images to NumPy arrays.
+    - Convert a NumPy image to a PyTorch tensor.
+    - Convert a PyTorch tensor to a NumPy image.
+    - Convert a NumPy image or a batch of images to a PIL image.
+    """
+
+    def convert_image_to_tensor(self, image: Union[PIL.Image.Image, np.ndarray]) -> torch.Tensor:
+        """
+        Convert a PIL image or a NumPy array to a PyTorch tensor.
+
+        Args:
+            image (Union[PIL.Image.Image, np.ndarray]): The input image, either as a PIL image or a NumPy array.
+
+        Returns:
+            torch.Tensor: The converted image as a PyTorch tensor.
+        """
         if isinstance(image, PIL.Image.Image):
             image = self.pil_to_numpy(image)
 
         return self.numpy_to_pt(image)
 
     def post_process_image(self, image: torch.Tensor, return_type: str):
+        """
+        Post-process a PyTorch tensor image and convert it to the specified return type.
+
+        Args:
+            image (torch.Tensor): The input image as a PyTorch tensor.
+            return_type (str): The desired return type, either "pt" for PyTorch tensor, "np" for NumPy array, or "pil" for PIL image.
+
+        Returns:
+            Union[torch.Tensor, np.ndarray, List[PIL.Image.Image]]: The post-processed image in the specified return type.
+        """
         if return_type == "pt":
             return image
 
@@ -42,6 +73,12 @@ class ImageMixin:
     def pil_to_numpy(images: Union[List[PIL.Image.Image], PIL.Image.Image]) -> np.ndarray:
         """
         Convert a PIL image or a list of PIL images to NumPy arrays.
+
+        Args:
+            images (Union[List[PIL.Image.Image], PIL.Image.Image]): The input image(s) as PIL image(s).
+
+        Returns:
+            np.ndarray: The converted image(s) as a NumPy array.
         """
         if not isinstance(images, list):
             images = [images]
@@ -54,6 +91,12 @@ class ImageMixin:
     def numpy_to_pt(images: np.ndarray) -> torch.Tensor:
         """
         Convert a NumPy image to a PyTorch tensor.
+
+        Args:
+            images (np.ndarray): The input image(s) as a NumPy array.
+
+        Returns:
+            torch.Tensor: The converted image(s) as a PyTorch tensor.
         """
         if images.ndim == 3:
             images = images[..., None]
@@ -65,6 +108,12 @@ class ImageMixin:
     def pt_to_numpy(images: torch.Tensor) -> np.ndarray:
         """
         Convert a PyTorch tensor to a NumPy image.
+
+        Args:
+            images (torch.Tensor): The input image(s) as a PyTorch tensor.
+
+        Returns:
+            np.ndarray: The converted image(s) as a NumPy array.
         """
         images = images.cpu().permute(0, 2, 3, 1).float().numpy()
         return images
@@ -72,7 +121,13 @@ class ImageMixin:
     @staticmethod
     def numpy_to_pil(images: np.ndarray) -> List[PIL.Image.Image]:
         """
-        Convert a numpy image or a batch of images to a PIL image.
+        Convert a NumPy image or a batch of images to a PIL image.
+
+        Args:
+            images (np.ndarray): The input image(s) as a NumPy array.
+
+        Returns:
+            List[PIL.Image.Image]: The converted image(s) as PIL images.
         """
         if images.ndim == 3:
             images = images[None, ...]
