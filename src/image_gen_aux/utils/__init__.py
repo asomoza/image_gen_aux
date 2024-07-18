@@ -14,8 +14,5 @@
 
 from .import_utils import IMAGE_AUX_SLOW_IMPORT, OptionalDependencyNotAvailable, _LazyModule, is_torch_available
 from .loading_utils import load_image
-from .logging import get_logger
+from .model_utils import get_model_path
 from .tiling_utils import create_gradient_mask, tiled_upscale
-
-
-logger = get_logger(__name__)

@@ -17,11 +17,10 @@ from typing import Union
 import numpy as np
 import PIL.Image
 import torch
-from huggingface_hub import hf_hub_download, model_info
 from spandrel import ImageModelDescriptor, ModelLoader
 
 from ..image_processor import ImageMixin
-from ..utils import tiled_upscale
+from ..utils import get_model_path, tiled_upscale
 
 
 class UpscaleWithModel(ImageMixin):
@@ -65,21 +64,7 @@ class UpscaleWithModel(ImageMixin):
             subfolder (`str`, *optional*):
                 An optional value corresponding to a folder inside the model repo.
         """
-        if filename is None:
-            info = model_info(pretrained_model_or_path)
-            filename = next(
-                (
-                    sibling.rfilename
-                    for sibling in info.siblings
-                    if os.path.splitext(sibling.rfilename)[1] == ".safetensors"
-                ),
-                None,
-            )
-
-            if filename is None:
-                raise FileNotFoundError("No safetensors checkpoint found.")
-
-        model_path = hf_hub_download(pretrained_model_or_path, filename, subfolder=subfolder)
+        model_path = get_model_path(pretrained_model_or_path, filename, subfolder)
         model = ModelLoader().load_from_file(model_path)
 
         # validate that it's the correct model
