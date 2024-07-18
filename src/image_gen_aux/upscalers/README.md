@@ -23,7 +23,22 @@ original = load_image(
 upscaler = UpscaleWithModel.from_pretrained("OzzyGT/UltraSharp").to("cuda")
 image = upscaler(original)
 image.save("upscaled.png")
+```
 
+### Tiling
+
+Tiling can be enabled to use less resources.
+
+```python
+image = upscaler(original, tiling=True, tile_width=768, tile_height=768, overlap=8)
+```
+
+### Scale
+
+The scale is automatically obtained from the model but you can override the scale with the `scale` argumen:
+
+```python
+image = upscaler(original, scale=2)
 ```
 
 ### List of safetensors checkpoints
@@ -33,6 +48,8 @@ This is the current list of safetensor checkpoints you can use from the hub.
 |Model|Scale|Repository|Owner|
 |---|---|---|---|
 |UltraSharp|4X|OzzyGT/UltraSharp|[Kim2091](https://huggingface.co/Kim2091)|
+|DAT|2X|OzzyGT/DAT_X2|[zhengchen1999](https://github.com/zhengchen1999)|
+|DAT|3X|OzzyGT/DAT_X3|[zhengchen1999](https://github.com/zhengchen1999)|
 |DAT|4X|OzzyGT/DAT_X4|[zhengchen1999](https://github.com/zhengchen1999)|
 
 If you own the model and want us to change the repository to your name/organization please open an issue.
