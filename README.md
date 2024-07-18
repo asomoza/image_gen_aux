@@ -52,3 +52,4 @@ This library uses inference and models from various authors. If you think you mu
 
 * [UltraSharp](https://openmodeldb.info/models/4x-UltraSharp)
 * [DAT](https://github.com/zhengchen1999/dat)
+* [RealPLKSR](https://github.com/Phhofm/models)
