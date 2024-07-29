@@ -20,7 +20,7 @@ original = load_image(
     "https://huggingface.co/datasets/OzzyGT/testing-resources/resolve/main/simple_upscale/hippowaffle_small.png"
 )
 
-upscaler = UpscaleWithModel.from_pretrained("OzzyGT/UltraSharp").to("cuda")
+upscaler = UpscaleWithModel.from_pretrained("Kim2091/UltraSharp").to("cuda")
 image = upscaler(original)
 image.save("upscaled.png")
 ```
@@ -47,7 +47,7 @@ This is the current list of safetensor checkpoints you can use from the hub.
 
 |Model|Scale|Repository|Owner|
 |---|---|---|---|
-|UltraSharp|4X|OzzyGT/UltraSharp|[Kim2091](https://huggingface.co/Kim2091)|
+|UltraSharp|4X|Kim2091/UltraSharp|[Kim2091](https://huggingface.co/Kim2091)|
 |DAT|2X|OzzyGT/DAT_X2|[zhengchen1999](https://github.com/zhengchen1999)|
 |DAT|3X|OzzyGT/DAT_X3|[zhengchen1999](https://github.com/zhengchen1999)|
 |DAT|4X|OzzyGT/DAT_X4|[zhengchen1999](https://github.com/zhengchen1999)|
