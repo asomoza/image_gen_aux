@@ -21,16 +21,16 @@ from safetensors.torch import load_file
 
 from ...image_processor import ImageMixin
 from ...utils import SAFETENSORS_FILE_EXTENSION, get_model_path
+from ..preprocessor import Preprocessor
 from .model import Generator
 
 
-class LineArtPreprocessor(ImageMixin):
-    def __init__(self, model):
-        super().__init__()
-        self.model = model
+class LineArtPreprocessor(Preprocessor, ImageMixin):
+    """Preprocessor specifically designed for converting images to line art.
 
-    def to(self, device):
-        self.model = self.model.to(device)
+    This class inherits from both `Preprocessor` and `ImageMixin`, please refer to each
+    one to get more information.
+    """
 
     @classmethod
     def from_pretrained(
@@ -61,6 +61,22 @@ class LineArtPreprocessor(ImageMixin):
         invert: bool = True,
         return_type: str = "pil",
     ):
+        """Preprocesses an image and generates line art using the pre-trained model.
+
+        Args:
+            image (Union[PIL.Image.Image, np.ndarray, torch.Tensor]): Input image in PIL Image,
+                NumPy array, or PyTorch tensor format.
+            resolution_scale (float, optional): Scale factor for image resolution during
+                preprocessing and post-processing (defaults to 1.0 for no scaling).
+            invert (bool, optional): Inverts the generated image if True (white or black background)
+                Defaults to True.
+            return_type (str, optional): The desired return type, either "pt" for PyTorch tensor, "np" for NumPy array,
+                or "pil" for PIL image. Defaults to "pil" for PIL Image format.
+
+        Returns:
+            Union[PIL.Image.Image, np.ndarray, torch.Tensor]: The generated line art in the
+                specified output format.
+        """
         if not isinstance(image, torch.Tensor):
             image = self.convert_image_to_tensor(image)
 

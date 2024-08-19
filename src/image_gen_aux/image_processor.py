@@ -141,6 +141,17 @@ class ImageMixin:
         return pil_images
 
     def scale_image(self, image: torch.Tensor, scale: float, mutiple_factor: int = 8) -> torch.Tensor:
+        """
+        Scales an image while maintaining aspect ratio and ensuring dimensions are multiples of `multiple_factor`.
+
+        Args:
+            image (torch.Tensor): The input image tensor of shape (batch, channels, height, width).
+            scale (float): The scaling factor to apply to the image dimensions.
+            multiple_factor (int, optional): The factor by which the new dimensions should be divisible. Defaults to 8.
+
+        Returns:
+            torch.Tensor: The scaled image tensor.
+        """
         _batch, _channels, height, width = image.shape
 
         # Calculate new dimensions while maintaining aspect ratio

@@ -6,12 +6,20 @@ from torch import Tensor
 
 
 def get_parameter_device(parameter: torch.nn.Module) -> torch.device:
+    """
+    Gets the device of a PyTorch module's parameters or buffers.
+
+    Args:
+        parameter (torch.nn.Module): The PyTorch module to get the device from.
+
+    Returns:
+        torch.device: The device of the module's parameters or buffers.
+    """
     try:
         parameters_and_buffers = itertools.chain(parameter.parameters(), parameter.buffers())
         return next(parameters_and_buffers).device
     except StopIteration:
         # For torch.nn.DataParallel compatibility in PyTorch 1.5
-
         def find_tensor_attributes(module: torch.nn.Module) -> List[Tuple[str, Tensor]]:
             tuples = [(k, v) for k, v in module.__dict__.items() if torch.is_tensor(v)]
             return tuples
@@ -22,6 +30,15 @@ def get_parameter_device(parameter: torch.nn.Module) -> torch.device:
 
 
 def get_parameter_dtype(parameter: torch.nn.Module) -> torch.dtype:
+    """
+    Gets the data type of a PyTorch module's parameters or buffers.
+
+    Args:
+        parameter (torch.nn.Module): The PyTorch module to get the data type from.
+
+    Returns:
+        torch.dtype: The data type of the module's parameters or buffers.
+    """
     try:
         params = tuple(parameter.parameters())
         if len(params) > 0:
@@ -33,7 +50,6 @@ def get_parameter_dtype(parameter: torch.nn.Module) -> torch.dtype:
 
     except StopIteration:
         # For torch.nn.DataParallel compatibility in PyTorch 1.5
-
         def find_tensor_attributes(module: torch.nn.Module) -> List[Tuple[str, Tensor]]:
             tuples = [(k, v) for k, v in module.__dict__.items() if torch.is_tensor(v)]
             return tuples
@@ -44,6 +60,17 @@ def get_parameter_dtype(parameter: torch.nn.Module) -> torch.dtype:
 
 
 class ModelMixin(torch.nn.Module):
+    """
+    This mixin class provides convenient properties to access the device and data type
+    of a PyTorch module.
+
+    By inheriting from this class, your custom PyTorch modules can access these properties
+    without the need for manual retrieval of device and data type information.
+
+    **Note:** These properties assume that all parameters and buffers of the module reside
+    on the same device and have the same data type, respectively.
+    """
+
     def __init__(self):
         super().__init__()
 
