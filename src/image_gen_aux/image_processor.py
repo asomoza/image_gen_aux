@@ -139,3 +139,21 @@ class ImageMixin:
             pil_images = [Image.fromarray(image) for image in images]
 
         return pil_images
+
+    def scale_image(self, image: torch.Tensor, scale: float, mutiple_factor: int = 8) -> torch.Tensor:
+        _batch, _channels, height, width = image.shape
+
+        # Calculate new dimensions while maintaining aspect ratio
+        new_height = int(height * scale)
+        new_width = int(width * scale)
+
+        # Ensure new dimensions are multiples of mutiple_factor
+        new_height = (new_height // mutiple_factor) * mutiple_factor
+        new_width = (new_width // mutiple_factor) * mutiple_factor
+
+        # Resize the image using the calculated dimensions
+        resized_image = torch.nn.functional.interpolate(
+            image, size=(new_height, new_width), mode="bilinear", align_corners=False
+        )
+
+        return resized_image
