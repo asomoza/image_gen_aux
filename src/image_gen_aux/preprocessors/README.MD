@@ -2,7 +2,7 @@
 
 ## Supported preprocessors
 
-This is the list of the currently supported preprocessors
+This is a list of the currently supported preprocessors.
 
 * [LineArtPreprocessor](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/preprocesors/lineart/README.md)
 
