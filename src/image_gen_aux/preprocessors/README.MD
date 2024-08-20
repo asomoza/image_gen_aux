@@ -33,7 +33,7 @@ lineart_preprocessor = LineArtPreprocessor.from_pretrained("lllyasviel/Annotator
 
 ### List of safetensors checkpoints
 
-This is the current list of safetensor checkpoints you can use from the hub.
+This is the current list of safetensor checkpoints available on the Hub.
 
 |Preprocessor|Repository|Author|
 |---|---|---|
