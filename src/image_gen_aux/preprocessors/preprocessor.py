@@ -27,10 +27,10 @@ class Preprocessor(ABC):
         (e.g., CPU or GPU).
 
         Args:
-            device (torch.device): The target device.
+            device (`torch.device`): The target device.
 
         Returns:
-            Preprocessor: The preprocessor object itself (for method chaining).
+            `Preprocessor`: The preprocessor object itself (for method chaining).
         """
         self.model = self.model.to(device)
         return self
