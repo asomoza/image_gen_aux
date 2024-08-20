@@ -55,6 +55,6 @@ This library uses inference and models from various authors. If you think you mu
 * [DAT](https://github.com/zhengchen1999/dat)
 * [RealPLKSR|DAT](https://github.com/Phhofm/models)
 
-### Preprocesors
+### Preprocessors
 
 * [LineArt](https://github.com/carolineec/informative-drawings)
