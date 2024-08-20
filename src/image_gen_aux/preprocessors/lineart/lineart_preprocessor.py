@@ -28,7 +28,7 @@ from .model import Generator
 class LineArtPreprocessor(Preprocessor, ImageMixin):
     """Preprocessor specifically designed for converting images to line art.
 
-    This class inherits from both `Preprocessor` and `ImageMixin`, please refer to each
+    This class inherits from both `Preprocessor` and `ImageMixin`. Please refer to each
     one to get more information.
     """
 
