@@ -61,13 +61,13 @@ def get_parameter_dtype(parameter: torch.nn.Module) -> torch.dtype:
 
 class ModelMixin(torch.nn.Module):
     """
-    This mixin class provides convenient properties to access the device and data type
+    Provides convenient properties to access the device and data type
     of a PyTorch module.
 
     By inheriting from this class, your custom PyTorch modules can access these properties
-    without the need for manual retrieval of device and data type information.
+    without manual retrieval of device and data type information.
 
-    **Note:** These properties assume that all parameters and buffers of the module reside
+    These properties assume that all module parameters and buffers reside
     on the same device and have the same data type, respectively.
     """
 
