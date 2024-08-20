@@ -21,12 +21,11 @@ image = lineart_preprocessor(input_image)
 image.save("lineart.png")
 ```
 
-To load a model you can use the HuggingFace Hub Repository ID, an url or a local path. You can also load `pickle` checkpoints but
-its not recommended. If the checkpoint has custom imports (high risk!!!) you'll need to set the `weights_only` argument to `False`.
+Use the Hugging Face Hub model id, a URL, or a local path to load a model. You can also load pickle checkpoints, but it's not recommended due to the [vulnerabilities](https://docs.python.org/3/library/pickle.html) of pickled files. Loading [safetensor](https://hf.co/docs/safetensors/index) files is a more secure option.
+
+If the checkpoint has custom imports (high risk!), you'll need to set the `weights_only` argument to `False`.
 
 You can also specify a `filename` and a `subfolder` if needed.
-
-Example:
 
 ```python
 lineart_preprocessor = LineArtPreprocessor.from_pretrained("lllyasviel/Annotators", filename="sk_model.pth", weights_only=False).to("cuda")
