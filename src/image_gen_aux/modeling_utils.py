@@ -10,10 +10,10 @@ def get_parameter_device(parameter: torch.nn.Module) -> torch.device:
     Gets the device of a PyTorch module's parameters or buffers.
 
     Args:
-        parameter (torch.nn.Module): The PyTorch module to get the device from.
+        parameter (`torch.nn.Module`): The PyTorch module from which to get the device.
 
     Returns:
-        torch.device: The device of the module's parameters or buffers.
+        `torch.device`: The device of the module's parameters or buffers.
     """
     try:
         parameters_and_buffers = itertools.chain(parameter.parameters(), parameter.buffers())
