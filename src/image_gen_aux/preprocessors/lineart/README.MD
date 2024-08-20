@@ -10,11 +10,6 @@ From the project page [summary](https://carolineec.github.io/informative_drawing
 
 ## Usage
 
-## Additional resources
-
-* [Project page](https://carolineec.github.io/informative_drawings/)
-* [Paper](https://arxiv.org/abs/2203.12691)
-
 ```python
 from image_gen_aux import LineArtPreprocessor
 from image_gen_aux.utils import load_image
@@ -27,3 +22,8 @@ lineart_preprocessor = LineArtPreprocessor.from_pretrained("OzzyGT/lineart").to(
 image = lineart_preprocessor(input_image)
 image.save("lineart.png")
 ```
+
+## Additional resources
+
+* [Project page](https://carolineec.github.io/informative_drawings/)
+* [Paper](https://arxiv.org/abs/2203.12691)

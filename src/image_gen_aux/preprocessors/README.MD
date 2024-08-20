@@ -1,10 +1,12 @@
-# PREPROCESSORS
+# Preprocessors
+
+Preprocessors in this context refer to the application of machine learning models to images or groups of images as a preliminary step for other tasks. A common use case is to feed preprocessed images into a controlnet to guide the generation of a diffusion model. Examples of preprocessors include depth maps, normals, and edge detection.
 
 ## Supported preprocessors
 
 This is a list of the currently supported preprocessors.
 
-* [LineArtPreprocessor](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/preprocesors/lineart/README.md)
+* [LineArtPreprocessor](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/preprocessors/lineart/README.md)
 
 ### How to use
 
