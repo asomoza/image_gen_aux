@@ -59,17 +59,17 @@ class Preprocessor(ABC):
         Preprocesses an image for use with the underlying model.
 
         Args:
-            image (Union[PIL.Image.Image, np.ndarray, torch.Tensor]): The input
-                image in PIL Image format, NumPy array, or PyTorch tensor.
-            resolution_scale (float, optional): A scaling factor to apply to
-                the image resolution. Defaults to 1.0 (no scaling).
-            invert (bool, optional): Whether to invert the image.
-                Defaults to True.
-            return_type (str, optional): The desired return type, either "pt" for PyTorch tensor,
-                "np" for NumPy array, or "pil" for PIL image. Defaults to "pil" for PIL Image format.
+            image (`Union[PIL.Image.Image, np.ndarray, torch.Tensor]`): Input image as PIL Image,
+                NumPy array, or PyTorch tensor format.
+            resolution_scale (`float`, optional, defaults to 1.0): Scale factor for image resolution during
+            resolution_scale (`float`, *optional*, defaults to 1.0): Scale factor for image resolution during
+                preprocessing and post-processing. Defaults to 1.0 for no scaling.
+            invert (`bool`, *optional*, defaults to True): Inverts the generated image if True.
+            return_type (`str`, *optional*, defaults to "pil"): The desired return type, either "pt" for PyTorch tensor,
+                "np" for NumPy array, or "pil" for PIL image.
 
         Returns:
-            Union[PIL.Image.Image, torch.Tensor]: The preprocessed image in the
+            `Union[PIL.Image.Image, torch.Tensor]`: The preprocessed image in the
                 specified format.
         """
         pass
