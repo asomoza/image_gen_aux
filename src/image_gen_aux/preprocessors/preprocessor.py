@@ -15,7 +15,7 @@ class Preprocessor(ABC):
     respective models.
 
     Args:
-        model (nn.Module): The torch model to be used.
+        model (`nn.Module`): The torch model to use.
     """
 
     def __init__(self, model):
