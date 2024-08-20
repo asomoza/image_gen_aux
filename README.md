@@ -23,7 +23,7 @@ Set of auxiliary tools to use with image and video generation libraries. Mainly 
 Each set of tools has its own README where you can find more information on how to use them.
 
 * [Upscalers](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/upscalers/README.md)
-* [Preprocesors](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/preprocesors/README.md)
+* [Preprocessors](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/preprocessors/README.md)
 
 ## Installation
 
