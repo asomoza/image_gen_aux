@@ -34,10 +34,10 @@ def get_parameter_dtype(parameter: torch.nn.Module) -> torch.dtype:
     Gets the data type of a PyTorch module's parameters or buffers.
 
     Args:
-        parameter (torch.nn.Module): The PyTorch module to get the data type from.
+        parameter (`torch.nn.Module`): The PyTorch module from which to get the data type.
 
     Returns:
-        torch.dtype: The data type of the module's parameters or buffers.
+        `torch.dtype`: The data type of the module's parameters or buffers.
     """
     try:
         params = tuple(parameter.parameters())
