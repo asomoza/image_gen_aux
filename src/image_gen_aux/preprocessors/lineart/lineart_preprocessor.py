@@ -64,17 +64,16 @@ class LineArtPreprocessor(Preprocessor, ImageMixin):
         """Preprocesses an image and generates line art using the pre-trained model.
 
         Args:
-            image (Union[PIL.Image.Image, np.ndarray, torch.Tensor]): Input image in PIL Image,
+            image (`Union[PIL.Image.Image, np.ndarray, torch.Tensor]`): Input image as PIL Image,
                 NumPy array, or PyTorch tensor format.
-            resolution_scale (float, optional): Scale factor for image resolution during
-                preprocessing and post-processing (defaults to 1.0 for no scaling).
-            invert (bool, optional): Inverts the generated image if True (white or black background)
-                Defaults to True.
-            return_type (str, optional): The desired return type, either "pt" for PyTorch tensor, "np" for NumPy array,
-                or "pil" for PIL image. Defaults to "pil" for PIL Image format.
+            resolution_scale (`float`, optional, defaults to 1.0): Scale factor for image resolution during
+                preprocessing and post-processing. Defaults to 1.0 for no scaling.
+            invert (`bool`, *optional*, defaults to True): Inverts the generated image if True (white or black background).
+            return_type (`str`, *optional*, defaults to "pil"): The desired return type, either "pt" for PyTorch tensor, "np" for NumPy array,
+                or "pil" for PIL image.
 
         Returns:
-            Union[PIL.Image.Image, np.ndarray, torch.Tensor]: The generated line art in the
+            `Union[PIL.Image.Image, np.ndarray, torch.Tensor]`: The generated line art in the
                 specified output format.
         """
         if not isinstance(image, torch.Tensor):
