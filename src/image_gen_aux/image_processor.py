@@ -150,7 +150,7 @@ class ImageMixin:
             multiple_factor (`int`, *optional*, defaults to 8): The factor by which the new dimensions should be divisible.
 
         Returns:
-            torch.Tensor: The scaled image tensor.
+            `torch.Tensor`: The scaled image tensor.
         """
         _batch, _channels, height, width = image.shape
 
