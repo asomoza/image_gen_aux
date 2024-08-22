@@ -8,7 +8,7 @@ This is a list of the currently supported preprocessors.
 
 * [LineArtPreprocessor](https://github.com/asomoza/image_gen_aux/blob/main/src/image_gen_aux/preprocessors/lineart/README.md)
 
-### How to use
+## General preprocessor usage
 
 ```python
 from image_gen_aux import LineArtPreprocessor
