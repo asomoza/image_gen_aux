@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
-from typing import Union
+from typing import List, Union
 
 import numpy as np
 import PIL.Image
@@ -56,19 +56,21 @@ class LineArtPreprocessor(Preprocessor, ImageMixin):
     @torch.inference_mode
     def __call__(
         self,
-        image: Union[PIL.Image.Image, np.ndarray, torch.Tensor],
+        image: Union[PIL.Image.Image, np.ndarray, torch.Tensor, List[PIL.Image.Image]],
         resolution_scale: float = 1.0,
         invert: bool = True,
+        batch_size: int = 1,
         return_type: str = "pil",
     ):
         """Preprocesses an image and generates line art using the pre-trained model.
 
         Args:
-            image (`Union[PIL.Image.Image, np.ndarray, torch.Tensor]`): Input image as PIL Image,
-                NumPy array, or PyTorch tensor format.
+            image (`Union[PIL.Image.Image, np.ndarray, torch.Tensor, List[PIL.Image.Image]]`): Input image as PIL Image,
+                NumPy array, PyTorch tensor format or a list of PIL Images
             resolution_scale (`float`, optional, defaults to 1.0): Scale factor for image resolution during
                 preprocessing and post-processing. Defaults to 1.0 for no scaling.
             invert (`bool`, *optional*, defaults to True): Inverts the generated image if True (white or black background).
+            batch_size (`int`, *optional*, defaults to 1): The number of images to process in each batch.
             return_type (`str`, *optional*, defaults to "pil"): The desired return type, either "pt" for PyTorch tensor, "np" for NumPy array,
                 or "pil" for PIL image.
 
@@ -79,13 +81,17 @@ class LineArtPreprocessor(Preprocessor, ImageMixin):
         if not isinstance(image, torch.Tensor):
             image = self.convert_image_to_tensor(image)
 
-        input_image = self.scale_image(image, resolution_scale) if resolution_scale != 1.0 else image
+        image = self.scale_image(image, resolution_scale) if resolution_scale != 1.0 else image
 
-        input_image = input_image.to(self.model.device)
-        lineart = self.model(input_image)
+        processed_images = []
 
-        if invert:
-            lineart = 255 - lineart
+        for i in range(0, len(image), batch_size):
+            batch = image[i : i + batch_size].to(self.model.device)
+            lineart = self.model(batch)
+            if invert:
+                lineart = 255 - lineart
+            processed_images.append(lineart.cpu())
+        lineart = torch.cat(processed_images, dim=0)
 
         if resolution_scale != 1.0:
             lineart = self.scale_image(lineart, 1 / resolution_scale)
