@@ -12,4 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .modeling import IntermediateFlowNet
+import torch
+
+
+_DTYPE_MAPPING = {
+    "fp32": torch.float32,
+    "float32": torch.float32,
+    "torch.float32": torch.float32,
+    "fp16": torch.float16,
+    "float16": torch.float16,
+    "torch.float16": torch.float16,
+    "bf16": torch.bfloat16,
+    "bfloat16": torch.bfloat16,
+    "torch.bfloat16": torch.bfloat16,
+}
+
+
+def get_torch_dtype_from_string(dtype: str) -> torch.dtype:
+    if dtype not in _DTYPE_MAPPING.keys():
+        raise ValueError(f"The data type {dtype=} is invalid. Supported dtypes: {list(_DTYPE_MAPPING.keys())}")
+    return _DTYPE_MAPPING[dtype]

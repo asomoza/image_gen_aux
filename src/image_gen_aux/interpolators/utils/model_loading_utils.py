@@ -25,8 +25,9 @@ from .constants import SAFETENSORS_FILE_EXTENSION, SAFETENSORS_WEIGHTS_INDEX_NAM
 from .hub_utils import _add_variant, _get_model_file
 
 
-def load_state_dict(checkpoint_file: Union[str, os.PathLike]) -> Dict[str, Any]:
+def load_state_dict(checkpoint_file: Union[str, os.PathLike], torch_load_kwargs: Dict[str, Any] = {}) -> Dict[str, Any]:
     r"""Reads a checkpoint file, returning properly formatted errors if they arise."""
+    
     try:
         file_extension = os.path.basename(checkpoint_file).split(".")[-1]
         if file_extension == SAFETENSORS_FILE_EXTENSION:
@@ -34,7 +35,7 @@ def load_state_dict(checkpoint_file: Union[str, os.PathLike]) -> Dict[str, Any]:
         else:
             return torch.load(
                 checkpoint_file,
-                map_location="cpu",
+                **torch_load_kwargs,
             )
     except Exception as e:
         try:
