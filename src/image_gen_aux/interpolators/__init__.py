@@ -14,4 +14,5 @@
 
 from .rife import IntermediateFlowNet
 
+
 __version__ = "0.0.1"

@@ -52,9 +52,11 @@ def replace_keys_(state_dict: Dict[str, Any], replace_keys: Dict[str, str]) -> N
         for old_key, new_key in replace_keys.items():
             renamed_key = renamed_key.replace(old_key, new_key)
         update_state_dict_(state_dict, key, renamed_key)
-    
 
-def custom_remap_(state_dict: Dict[str, Any], custom_remap_keys: Dict[str, Callable[[Dict[str, Any], str], None]]) -> None:
+
+def custom_remap_(
+    state_dict: Dict[str, Any], custom_remap_keys: Dict[str, Callable[[Dict[str, Any], str], None]]
+) -> None:
     for key in list(state_dict.keys()):
         for identifier, remap_fn_ in list(state_dict.keys()):
             if identifier not in key:
@@ -62,15 +64,14 @@ def custom_remap_(state_dict: Dict[str, Any], custom_remap_keys: Dict[str, Calla
             remap_fn_(state_dict, key)
 
 
-def convert(original_ckpt_path: str, output_dir: Optional[str] = None, dtype: str = "fp32", push_to_hub: bool = False) -> nn.Module:
-    from image_gen_aux.interpolators.utils.model_loading_utils import load_state_dict
+def convert(
+    original_ckpt_path: str, output_dir: Optional[str] = None, dtype: str = "fp32", push_to_hub: bool = False
+) -> nn.Module:
     from image_gen_aux.interpolators import IntermediateFlowNet
+    from image_gen_aux.interpolators.utils.model_loading_utils import load_state_dict
     from image_gen_aux.utils.torch_utils import get_torch_dtype_from_string
 
-    torch_load_kwargs = {
-        "map_location": "cpu",
-        "weights_only": True
-    }
+    torch_load_kwargs = {"map_location": "cpu", "weights_only": True}
     state_dict = load_state_dict(original_ckpt_path, torch_load_kwargs)
     state_dict = recursively_find_state_dict(state_dict)
 
@@ -85,7 +86,7 @@ def convert(original_ckpt_path: str, output_dir: Optional[str] = None, dtype: st
 
     if output_dir is not None:
         model.save_pretrained(output_dir)
-    
+
     if push_to_hub:
         # TODO
         model.push_to_hub()
@@ -94,9 +95,13 @@ def convert(original_ckpt_path: str, output_dir: Optional[str] = None, dtype: st
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--original_ckpt_path", type=str, required=True, help="Path to original checkpoint.")
-    parser.add_argument("--output_dir", type=str, help="Path to output directory where converted model should be stored.")
+    parser.add_argument(
+        "--output_dir", type=str, help="Path to output directory where converted model should be stored."
+    )
     parser.add_argument("--dtype", type=str, default="fp32", help="Data type in which the model should be stored.")
-    parser.add_argument("--push_to_hub", action="store_true", help="Whether or not to push the converted checkpoint to the Hub.")
+    parser.add_argument(
+        "--push_to_hub", action="store_true", help="Whether or not to push the converted checkpoint to the Hub."
+    )
     return parser.parse_args()
 
 
