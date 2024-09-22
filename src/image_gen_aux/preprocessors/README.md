@@ -41,10 +41,11 @@ This is the current list of safetensor checkpoints available on the Hub.
 
 |Preprocessor|Repository|Author|
 |---|---|---|
-|LineArt|OzzyGT/lineart|[Caroline Chan](https://github.com/carolineec)|
 |Depth Anything V2 Small|depth-anything/Depth-Anything-V2-Small-hf|<https://depth-anything-v2.github.io/>|
 |Depth Anything V2 Base|depth-anything/Depth-Anything-V2-Base-hf|<https://depth-anything-v2.github.io/>|
 |Depth Anything V2 Large|depth-anything/Depth-Anything-V2-Large-hf|<https://depth-anything-v2.github.io/>|
+|LineArt|OzzyGT/lineart|[Caroline Chan](https://github.com/carolineec)|
+|Teed|OzzyGT/teed|<https://github.com/xavysp/TEED>|
 |ZoeDepth NYU|Intel/zoedepth-nyu|<https://github.com/isl-org/ZoeDepth>|
 |ZoeDepth KITTI|Intel/zoedepth-kitti|<https://github.com/isl-org/ZoeDepth>|
 |ZoeDepth NYU and KITTI|Intel/zoedepth-nyu-kitti|<https://github.com/isl-org/ZoeDepth>|
