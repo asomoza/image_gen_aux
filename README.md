@@ -35,7 +35,7 @@ This is a very early version, so only the installation from source is available.
 
 ### Install with PyPi
 
-Soon
+`pip install git+https://github.com/asomoza/image_gen_aux.git`
 
 ## Contribution
 
@@ -54,7 +54,11 @@ This library uses inference and models from various authors. If you think you mu
 * [UltraSharp](https://openmodeldb.info/models/4x-UltraSharp)
 * [DAT](https://github.com/zhengchen1999/dat)
 * [RealPLKSR|DAT](https://github.com/Phhofm/models)
+* [Remacri](https://openmodeldb.info/models/4x-Remacri)
 
 ### Preprocessors
 
 * [LineArt](https://github.com/carolineec/informative-drawings)
+* [Depth Anything V2](https://depth-anything-v2.github.io)
+* [TEED](https://github.com/xavysp/TEED)
+* [ZoeDepth](https://github.com/isl-org/ZoeDepth)
