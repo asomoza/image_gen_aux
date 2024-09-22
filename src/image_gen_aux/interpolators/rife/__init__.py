@@ -13,3 +13,4 @@
 # limitations under the License.
 
 from .modeling import IntermediateFlowNet
+from .pipeline import RIFEPipeline

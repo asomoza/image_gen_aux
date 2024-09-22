@@ -101,7 +101,8 @@ class IntermediateFlowBlock(nn.Module):
         self.blocks = nn.ModuleList(blocks)
 
         self.conv_output = nn.Sequential(
-            nn.ConvTranspose2d(hidden_channels, out_channels, 4, 2, 1), nn.PixelShuffle(2)
+            nn.ConvTranspose2d(hidden_channels, out_channels, 4, 2, 1),
+            nn.PixelShuffle(2),
         )
 
     def forward(
@@ -110,7 +111,7 @@ class IntermediateFlowBlock(nn.Module):
         hidden_states = F.interpolate(hidden_states, scale_factor=1 / scale, mode="bilinear", align_corners=False)
 
         if flow is not None:
-            flow = F.interpolate(hidden_states, scale_factor=1 / scale, mode="bilinear", align_corners=False) / scale
+            flow = F.interpolate(flow, scale_factor=1 / scale, mode="bilinear", align_corners=False) / scale
             hidden_states = torch.cat([hidden_states, flow], dim=1)
 
         hidden_states = self.conv_input(hidden_states)

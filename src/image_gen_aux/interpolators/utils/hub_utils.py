@@ -41,9 +41,9 @@ from huggingface_hub.utils import (
 )
 from requests import HTTPError
 
+from ...utils.constants import HUGGINGFACE_CO_RESOLVE_ENDPOINT
 from ...utils.logging import get_logger
 from . import __version__
-from .constants import HUGGINGFACE_CO_RESOLVE_ENDPOINT
 
 
 logger = get_logger(__name__)

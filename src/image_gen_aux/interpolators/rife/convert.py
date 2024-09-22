@@ -22,14 +22,29 @@ def drop_(state_dict: Dict[str, Any], key: str) -> None:
     state_dict.pop(key, None)
 
 
+def remap_encode_(state_dict: Dict[str, Any], key: str) -> None:
+    # encode.cnn{x}.(weight|bias) -> encoder.blocks.{2*x}.(weight|bias)
+    split_key = key.split(".")
+    new_key = f"encoder.blocks.{2 * int(split_key[1][-1])}.{'.'.join(split_key[2:])}"
+    state_dict[new_key] = state_dict.pop(key)
+
+
 _REPLACE_KEYS_DICT = {
     "module.": "",
     "convblock": "blocks",
+    "block0": "blocks.0",
+    "block1": "blocks.1",
+    "block2": "blocks.2",
+    "block3": "blocks.3",
+    "lastconv": "conv_output",
+    "conv0.0.0": "conv_input.0",
+    "conv0.1.0": "conv_input.2",
 }
 
 _CUSTOM_KEYS_REMAP_DICT = {
     "teacher": drop_,
     "caltime": drop_,
+    "encode": remap_encode_,
 }
 
 _COMMON_MODELING_KEY_NAMES = ["model", "module", "state_dict", "pytorch_model", "pytorch_module"]
@@ -57,8 +72,8 @@ def replace_keys_(state_dict: Dict[str, Any], replace_keys: Dict[str, str]) -> N
 def custom_remap_(
     state_dict: Dict[str, Any], custom_remap_keys: Dict[str, Callable[[Dict[str, Any], str], None]]
 ) -> None:
-    for key in list(state_dict.keys()):
-        for identifier, remap_fn_ in list(state_dict.keys()):
+    for identifier, remap_fn_ in list(custom_remap_keys.items()):
+        for key in list(state_dict.keys()):
             if identifier not in key:
                 continue
             remap_fn_(state_dict, key)
@@ -107,3 +122,9 @@ def get_args():
 
 if __name__ == "__main__":
     args = get_args()
+    convert(
+        original_ckpt_path=args.original_ckpt_path,
+        output_dir=args.output_dir,
+        dtype=args.dtype,
+        push_to_hub=args.push_to_hub,
+    )

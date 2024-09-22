@@ -21,7 +21,7 @@ import safetensors
 import torch
 from huggingface_hub.utils import EntryNotFoundError
 
-from .constants import SAFETENSORS_FILE_EXTENSION, SAFETENSORS_WEIGHTS_INDEX_NAME, WEIGHTS_INDEX_NAME
+from ...utils.constants import SAFETENSORS_FILE_EXTENSION, SAFETENSORS_WEIGHTS_INDEX_NAME, WEIGHTS_INDEX_NAME
 from .hub_utils import _add_variant, _get_model_file
 
 
